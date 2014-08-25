@@ -1,0 +1,57 @@
+body {
+    font-family: 'Imprima', sans-serif;
+    background-color: #F5F5F5;
+}
+.container {
+    margin-top: 20px;
+}
+#entete {
+    height: 130px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 6px #bbb;
+}
+.comment {
+    border:thin;
+    border-style:solid;
+    border-color:#bbb;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color:#ddd;
+}
+textarea {
+    width:98%;
+}
+h1 {
+    padding-top:20px;
+    padding-left:50px;
+}
+.navbar {
+    margin-top: 10px;
+}
+.navbar-inner, .well, .comment {
+    box-shadow: 2px 2px 14px #999;
+}
+.navbar .nav li a {
+    text-align:center;
+    font-size:large;
+}
+.navbar .nav li a:hover {
+    background-color:#ccc;
+    color:#fff;
+    box-shadow: 2px 2px 14px #555;
+    -moz-transition: all 1s;
+    -webkit-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
+}
+.navbar .nav li a.actif {
+    background-color:#888;
+    color:#fff;
+    box-shadow: 2px 2px 14px #555;
+}
+footer {
+    min-height: 30px;
+    text-align: center;
+    padding-top: 10px;
+}
