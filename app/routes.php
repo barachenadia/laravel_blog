@@ -22,16 +22,33 @@ Route::get('inscription', function()
 Route::post('inscription', function()
 {
     $rules = array(
-        'nom' => 'required|min:5|max:20|alpha',
-        'passe' => 'required|min:6|max:10|alpha',
-        'confirmepasse' => 'required|same:passe'
+        'username' => 'required|min:5|max:20',
+        'password' => 'required|min:6|max:20',
+        //'confirmepasse' => 'required|same:passe'
     );
     $validator = Validator::make(Input::all(), $rules);
 
-    if ($validator->fails()) {
-        return Redirect::to('inscription')->withErrors($validator);
+ if ($validator->passes()) {
+    $user = new User;
+    $user->username = Input::get('username');
+
+    $user->email = Input::get('email');
+    $user->password = Hash::make(Input::get('password'));
+    $user->save();
+     return Redirect::to('login')->with('message', 'Thanks for registering!');
+    } else {
+        return Redirect::to('inscription')->withErrors($validator)
+
+
     }
-    else echo 'Vous êtes inscrit '.Input::get('nom');
+
+
+
+
+    // if ($validator->fails()) {
+    //     return Redirect::to('inscription')->withErrors($validator);
+    // }
+    // else echo 'Vous êtes inscrit '.Input::get('nom');
 });
 
 // ****** Inscription ******
