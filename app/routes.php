@@ -10,6 +10,58 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+// **** auth
+
+ // **** Inscription ******
+
+Route::get('inscription', function()
+{
+    return View::make('inscription');
+});
+
+Route::post('inscription', function()
+{
+    $rules = array(
+        'nom' => 'required|min:5|max:20|alpha',
+        'passe' => 'required|min:6|max:10|alpha',
+        'confirmepasse' => 'required|same:passe'
+    );
+    $validator = Validator::make(Input::all(), $rules);
+
+    if ($validator->fails()) {
+        return Redirect::to('inscription')->withErrors($validator);
+    }
+    else echo 'Vous êtes inscrit '.Input::get('nom');
+});
+
+// ****** Inscription ******
+
+          // ***** login *****
+
+Route::get('/', array('before' => 'auth', function()
+{
+    echo 'Maintenant vous êtes sur le site '.Auth::user()->username;
+}));
+
+Route::get('login', array('as' => 'login', 'before' => 'guest', function()
+{
+    return View::make('connexion');
+}));
+
+Route::post('connexion', array('before' => 'csrf', function()
+{
+    $nom = Input::get('nom');
+    $passe = Input::get('password');
+
+    if(Auth::attempt(array('username' => $nom, 'password' => $passe)))
+        return Redirect::to('/');
+    else
+        return Redirect::route('login');
+}));
+                        // **** login ****
+// ****** auth
+
+
 
 Route::get('/{match?}', array('as' => 'accueil', function ($match = NULL) {
     if($match) {

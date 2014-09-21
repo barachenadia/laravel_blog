@@ -6,6 +6,7 @@ class UserTableSeeder extends Seeder {
         DB::table('users')->insert(
 
             array(
+
                 array(
                     'id' => 1,
                     'username' => 'admin',

@@ -64,7 +64,19 @@ Route::filter('auth.basic', function()
 | response will be issued if they are, which you may freely change.
 |
 */
+Route::filter('csrf', function()
+{
+    if (Session::token() != Input::get('_token'))
+    {
+        throw new Illuminate\Session\TokenMismatchException;
+    }
+});
 
+
+Route::filter('auth', function()
+{
+    if (Auth::guest()) return Redirect::route('login');
+});
 Route::filter('guest', function()
 {
 	if (Auth::check()) return Redirect::to('/');
