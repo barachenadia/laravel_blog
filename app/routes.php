@@ -23,7 +23,7 @@ Route::post('inscription', function()
 {
     $rules = array(
         'username' => 'required|min:5|max:20',
-        'password' => 'required|min:6|max:20',
+         'password' => 'required|min:6|max:20',
         //'confirmepasse' => 'required|same:passe'
     );
     $validator = Validator::make(Input::all(), $rules);
@@ -37,7 +37,7 @@ Route::post('inscription', function()
     $user->save();
      return Redirect::to('login')->with('message', 'Thanks for registering!');
     } else {
-        return Redirect::to('inscription')->withErrors($validator)
+        return Redirect::to('inscription')->withErrors($validator);
 
 
     }
@@ -55,10 +55,10 @@ Route::post('inscription', function()
 
           // ***** login *****
 
-Route::get('/', array('before' => 'auth', function()
-{
-    echo 'Maintenant vous êtes sur le site '.Auth::user()->username;
-}));
+// Route::get('accueil', array('before' => 'auth', function()
+// {
+//     echo 'Maintenant vous êtes sur le site '.Auth::user()->username;
+// }));
 
 Route::get('login', array('as' => 'login', 'before' => 'guest', function()
 {
@@ -76,6 +76,13 @@ Route::post('connexion', array('before' => 'csrf', function()
         return Redirect::route('login');
 }));
                         // **** login ****
+
+// **** logout **********
+
+ Route::any("/logout", [
+  "as"   => "logout",
+  "uses" => "UsersController@logout"
+]);
 // ****** auth
 
 

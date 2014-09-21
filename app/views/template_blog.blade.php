@@ -20,6 +20,23 @@
                     <h1>
                         Mon joli blog !
                     </h1>
+                    <div style="float:right">
+                        @if (Auth::check())
+                                      <a href="{{ URL::route("logout") }}">
+                                        logout
+                                      </a> |
+                                      <div style="float:left">
+                                        <?php
+                                        echo 'Maintenant vous êtes sur le site '.Auth::user()->username;
+                                        ?>
+                                      </div>
+                                    @else
+                                      <a href="{{ URL::route("login") }}">
+                                        login
+                                      </a>
+                                    @endif
+                    </div>
+
                 </div>
             </header>
 
